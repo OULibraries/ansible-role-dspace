@@ -11,3 +11,26 @@
       - tomcat
       - tomcat-webapps
       - tomcat-admin-webapps
+
+- name: Create folder for scripts
+  file: path=/vagrant/bin state=directory
+
+- name: Create config folder
+  file: path=/vagrant/etc state=directory
+
+
+
+- name: Create script configuration file
+  template:
+    src: conf.j2
+    dest: /vagrant/etc/conf.sh
+      
+- name: Install scripts
+  copy:
+    src: "{{ item }}"
+    dest: /vagrant/bin/
+  with_items:
+    - build.sh
+    - clean.sh
+    - exportdb.sh
+    - reconfigure.sh
