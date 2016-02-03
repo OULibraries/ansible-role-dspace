@@ -1,0 +1,13 @@
+---
+
+- name: Install dspace dependencies
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+      - java-1.8.0-openjdk
+      - maven
+      - ant
+      - tomcat
+      - tomcat-webapps
+      - tomcat-admin-webapps

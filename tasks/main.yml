@@ -1,2 +1,5 @@
 ---
-# tasks file for lo5an.dspace
+- include: install.yml
+  sudo: yes
+- include: configure.yml
+  sudo: yes
