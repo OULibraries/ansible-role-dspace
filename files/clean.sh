@@ -1,7 +1,7 @@
 ## Configuration
 
 
-. /vagrant/etc/conf.sh 
+. /opt/oulib/etc/conf.sh 
 
 
 export ANT_OPTS="-Xms128m -Xmx800m"

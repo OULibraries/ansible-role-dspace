@@ -1,6 +1,6 @@
 ## Configuration
 
-. /vagrant/etc/conf.sh
+. /opt/oulib/etc/conf.sh
 
 
 cd ${DSPACE_SRC}/dspace/target/dspace-installer

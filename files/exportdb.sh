@@ -1,5 +1,5 @@
 #!/bin/bash
-. /vagrant/etc/conf.sh
+. /opt/oulib/etc/conf.sh
 
 
 

@@ -11,26 +11,54 @@
       - tomcat
       - tomcat-webapps
       - tomcat-admin-webapps
+      
+- name: Create folder for oulib scripts
+  file:
+    path: /opt/oulib/bin
+    state: directory
 
-- name: Create folder for scripts
-  file: path=/vagrant/bin state=directory
-
-- name: Create config folder
-  file: path=/vagrant/etc state=directory
-
-
+- name: Create folder for oulib config
+  file:
+    path: /opt/oulib/etc
+    state: directory
 
 - name: Create script configuration file
   template:
     src: conf.j2
-    dest: /vagrant/etc/conf.sh
-      
+    dest: /opt/oulib/etc/conf.sh
+
 - name: Install scripts
   copy:
     src: "{{ item }}"
-    dest: /vagrant/bin/
+    dest: /opt/oulib/bin/
   with_items:
     - build.sh
     - clean.sh
     - exportdb.sh
     - reconfigure.sh
+
+- name: Ensure /etc/profile.d/oulib.sh exists
+  file:
+    path: /etc/profile.d/oulib.sh
+    state: touch
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Add oulib scripts to path
+  lineinfile:
+    dest: /etc/profile.d/oulib.sh
+    line: 'export PATH=/opt/oulib/bin:$PATH'
+    
+- name: Add oulib  scripts to sudo secure_path
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin$'
+    line: 'Defaults    secure_path = /opt/oulib/bin:/sbin:/bin:/usr/sbin:/usr/bin'
+    validate: 'visudo -cf %s'
+
+# - name: Create maven settings file with @mire credentials
+#   template:
+#     src: m2__settings.xml.j2
+#     dest: ......m2/settings.xml

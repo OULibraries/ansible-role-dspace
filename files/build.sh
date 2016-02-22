@@ -1,10 +1,17 @@
 ## Configuration
 
-. /vagrant/etc/conf.sh
+. /opt/oulib/etc/conf.sh
 
 #
 # build dspace as an unprivleged user
 #
+if (( $EUID -= 0 )); then
+    echo "Please don't run as root"
+    exit
+fi
+
+
+
 cd ${DSPACE_SRC}
 #$MAVEN  -Dmaven.repo.local=/vagrant/m2 -Dmirage2.on=true -Denv=$MAVEN_PROFILE -Dskiptests package
 $MAVEN  -Dmirage2.on=true -Denv=$MAVEN_PROFILE -Dskiptests package
