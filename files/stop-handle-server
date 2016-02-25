@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+PID=`/bin/ps -ef | grep java | grep -E handle-....jar | grep -v 'grep' | awk '{print $2}'`
+
+if [ ! -z "$PID" ] ; then
+    for process in ${PID}
+    do
+	/bin/kill $process && success || failure
+    done
+    RETVAL=$?
+    echo
+    return $RETVAL
+fi

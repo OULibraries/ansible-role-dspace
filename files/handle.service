@@ -1,0 +1,15 @@
+[Unit]
+Description=DSpace Handle Service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+
+ExecStart=/opt/oulib/dspace/start-handle-server
+ExecStop=/opt/oulib/dspace/stop-handle-server
+
+User=tomcat
+Group=tomcat
+
+[Install]
+WantedBy=multi-user.target
