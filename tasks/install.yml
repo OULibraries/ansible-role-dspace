@@ -62,18 +62,18 @@
     
 - name: Save public key to file
   copy:
-    content: "{{ libdev_public }}"
+    content: "{{ deploy_public }}"
     dest: "/home/vagrant/.ssh/libdev_rsa.pub"
 
 - name: Save private key to file
   copy:
-    content: "{{ libdev_private }}"
+    content: "{{ deploy_private }}"
     dest: "/home/vagrant/.ssh/libdev_rsa"
 
  
 - name: Create maven settings file with @mire credentials
   template:
-    src: m2__settings.xml.j2
+    src: m2_settings.xml.j2
     dest: "/home/vagrant/.m2/settings.xml"
 
 
