@@ -12,53 +12,86 @@
       - tomcat-webapps
       - tomcat-admin-webapps
       
-- name: Create folder for oulib scripts
+- name: Create folder for oulib/dspace scripts
   file:
-    path: /opt/oulib/bin
+    path: /opt/oulib/dspace/bin
     state: directory
 
-- name: Create folder for oulib config
+- name: Create folder for oulib/dspace config
   file:
-    path: /opt/oulib/etc
+    path: /opt/oulib/dspace/etc
     state: directory
 
 - name: Create script configuration file
   template:
     src: conf.j2
-    dest: /opt/oulib/etc/conf.sh
+    dest: /opt/oulib/dspace/etc/conf.sh
 
 - name: Install scripts
   copy:
     src: "{{ item }}"
-    dest: /opt/oulib/bin/
+    dest: /opt/oulib/dspace/bin/
   with_items:
     - build.sh
     - clean.sh
     - exportdb.sh
     - reconfigure.sh
 
-- name: Ensure /etc/profile.d/oulib.sh exists
+- name: Ensure /etc/profile.d/oulib-dspace.sh exists
   file:
-    path: /etc/profile.d/oulib.sh
+    path: /etc/profile.d/oulib-dspace.sh
     state: touch
     mode: 0644
     owner: root
     group: root
 
-- name: Add oulib scripts to path
+- name: Add oulib/dspace scripts to path
   lineinfile:
-    dest: /etc/profile.d/oulib.sh
-    line: 'export PATH=/opt/oulib/bin:$PATH'
+    dest: /etc/profile.d/oulib-dspace.sh
+    line: 'export PATH=/opt/oulib/dspace/bin:$PATH'
     
-- name: Add oulib  scripts to sudo secure_path
+- name: Add oulib/dspace  scripts to sudo secure_path
   lineinfile:
     dest: /etc/sudoers
     state: present
     regexp: '^Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin$'
-    line: 'Defaults    secure_path = /opt/oulib/bin:/sbin:/bin:/usr/sbin:/usr/bin'
+    line: 'Defaults    secure_path = /opt/oulib/dspace/bin:/sbin:/bin:/usr/sbin:/usr/bin'
     validate: 'visudo -cf %s'
 
+
+
+# Move to local provisioner, see ec2-d7 role     
+#
+#
+# - name: lookup atmire mvn user in lastpass
+#   command: lpass show 373449821012849478 --username
+#   register: atmire.mvnuser
+
+# - name: lookup atmire password in lastpass
+#   command: lpass show 373449821012849478 --password
+#   register: atmire.mvnpass
+ 
 # - name: Create maven settings file with @mire credentials
 #   template:
 #     src: m2__settings.xml.j2
 #     dest: ......m2/settings.xml
+
+# - name: Get libdev private key from lastpass
+#   command: lpass show --field "Private Key" 5738026792
+#   register: libdev_private
+
+# - name: Save private key to file
+#   copy:
+#     content: "{{ libdev_private }}"
+#     dest: "/home/vagrant/.ssh/libdev_rsa"
+
+# - name: Get libdev public key from lastpass
+#   command: lpass show --field "Public Key" 5738026792
+#   register: libdev_public
+
+# - name: Save public key to file
+#   copy:
+#     content: "{{ libdev_public }}"
+#     dest: "/home/vagrant/.ssh/libdev_rsa.pub"
+
+ 
