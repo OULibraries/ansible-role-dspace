@@ -62,7 +62,7 @@
     
 - name: Save public key to file
   copy:
-    content: "{{ deploy_public_key }}"
+    content: "{{ hostvars['localhost']['deploy_public_key'] }}"
     dest: "/home/vagrant/.ssh/libdev_rsa.pub"
 
 - name: Save private key to file
