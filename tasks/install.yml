@@ -1,4 +1,4 @@
----
+ ---
 
 - name: Install dspace dependencies
   yum:
@@ -62,7 +62,7 @@
     
 - name: Save public key to file
   copy:
-    content: "{{ hostvars['default']['deploy_public_key'] }}"
+    content: "{{ hostvars.localhost.public_key }}"
     dest: "/home/vagrant/.ssh/libdev_rsa.pub"
 
 - name: Save private key to file
