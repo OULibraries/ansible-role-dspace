@@ -5,13 +5,13 @@
     name: "{{ item }}"
     state: installed
   with_items:
-      - java-1.8.0-openjdk
-      - maven
-      - ant
-      - tomcat
-      - tomcat-webapps
-      - tomcat-admin-webapps
-      
+    - java-1.8.0-openjdk
+    - maven
+    - ant
+    - tomcat
+    - tomcat-webapps
+    - tomcat-admin-webapps
+    
 - name: Create folder for oulib/dspace scripts
   file:
     path: /opt/oulib/dspace/bin
@@ -70,6 +70,12 @@
     content: "{{ hostvars.localhost.deploy_private_key }}"
     dest: "/home/vagrant/.ssh/libdev_rsa"
 
+
+- name: Create .m2 folder for maven repository
+  file:
+    path: "home/vagrant/.m2"
+    state: directory
+    
  
 - name: Create maven settings file with @mire credentials
   template:
