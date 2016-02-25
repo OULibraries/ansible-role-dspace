@@ -73,7 +73,7 @@
 
 - name: Create .m2 folder for maven repository
   file:
-    path: "home/vagrant/.m2"
+    path: "/home/vagrant/.m2"
     state: directory
     
  
