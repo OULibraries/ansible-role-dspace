@@ -1,5 +1,4 @@
 ---
-
 - name: Install dspace dependencies
   yum:
     name: "{{ item }}"
@@ -50,7 +49,7 @@
     dest: /etc/profile.d/oulib-dspace.sh
     line: 'export PATH=/opt/oulib/dspace/bin:$PATH'
     
-- name: Add oulib/dspace  scripts to sudo secure_path
+- name: Add oulib/dspace scripts to sudo secure_path
   lineinfile:
     dest: /etc/sudoers
     state: present
@@ -75,15 +74,13 @@
     owner: vagrant
     group: vagrant
 
-
 - name: Create .m2 folder for maven repository
   file:
     path: "/home/vagrant/.m2"
     state: directory
-    mode: 0644
+    mode: 0770
     owner: vagrant
     group: vagrant
-    
  
 - name: Create maven settings file with @mire credentials
   template:
