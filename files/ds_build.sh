@@ -11,6 +11,12 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 
+if [ ! -d $DSPACE_SRC ]; then
+    echo "No src dir, cloning with default branch."
+    git clone ${DSPACE_GIT} ${DSPACE_SRC}
+fi
+
+
 
 cd ${DSPACE_SRC}
 #$MAVEN  -Dmaven.repo.local=/vagrant/m2 -Dmirage2.on=true -Denv=$MAVEN_PROFILE -Dskiptests package
