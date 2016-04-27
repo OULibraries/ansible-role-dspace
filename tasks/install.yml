@@ -32,10 +32,10 @@
     src: "{{ item }}"
     dest: /opt/oulib/dspace/bin/
   with_items:
-    - build.sh
-    - clean.sh
-    - exportdb.sh
-    - reconfigure.sh
+    - ds_build.sh
+    - ds_clean.sh
+    - ds_exportdb.sh
+    - ds_reconfigure.sh
 
 - name: Ensure /etc/profile.d/oulib-dspace.sh exists
   file:
