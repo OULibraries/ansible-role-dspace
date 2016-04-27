@@ -7,10 +7,10 @@ export ANT_OPTS="-Xms128m -Xmx800m"
 
 
 # DSpace Paths
-DSPACE_GIT="git@github.com:OULibraries/shareok_dspace"
-DSPACE_SRC="/home/vagrant/shareok_dspace"
-DSPACE_RUN="/srv/shareok/dspace"
-DSPACE_DATA="/mnt/shareokdata/5x-assetstore0"
+DSPACE_GIT="{{ dspace.repo }}"
+DSPACE_SRC="{{ dspace.src }}"
+DSPACE_RUN="{{ dspace.support }}/dspace"
+DSPACE_DATA="{{ dspace.data }}"
 
 
 # DSpace Database Configuration
@@ -23,4 +23,4 @@ DB_NAME=dspace
 DB_PASS=dspace
 
 # 
-DB_EXPORT=/srv/shareok/export/shareok.sql
+DB_EXPORT={{ dspace.support }}/export/shareok.sql
