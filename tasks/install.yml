@@ -58,17 +58,22 @@
     line: 'Defaults    secure_path = /opt/oulib/dspace/bin:/sbin:/bin:/usr/sbin:/usr/bin'
     validate: 'visudo -cf %s'
 
-
     
 - name: Save public key to file
   copy:
     content: "{{ hostvars.localhost.deploy_public_key }}"
     dest: "/home/vagrant/.ssh/libdev_rsa.pub"
+    mode: 0600
+    owner: vagrant
+    group: vagrant
 
 - name: Save private key to file
   copy:
     content: "{{ hostvars.localhost.deploy_private_key }}"
     dest: "/home/vagrant/.ssh/libdev_rsa"
+    mode: 0600
+    owner: vagrant
+    group: vagrant
 
 
 - name: Create .m2 folder for maven repository
