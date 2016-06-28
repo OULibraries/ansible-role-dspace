@@ -1,13 +1,19 @@
 ## Configuration
 
-. /opt/oulib/etc/conf.sh
+. /opt/oulib/dspace/etc/conf.sh
 
 #
 # build dspace as an unprivleged user
 #
-if (( $EUID -= 0 )); then
+if [[ $EUID -eq 0 ]]; then
     echo "Please don't run as root"
     exit
+fi
+
+
+if [ ! -d $DSPACE_SRC ]; then
+    echo "No src dir, cloning with default branch."
+    git clone ${DSPACE_GIT} ${DSPACE_SRC}
 fi
 
 

@@ -1,6 +1,6 @@
 ## Configuration
 
-. /opt/oulib/etc/conf.sh
+. /opt/oulib/dspace/etc/conf.sh
 
 
 cd ${DSPACE_SRC}/dspace/target/dspace-installer

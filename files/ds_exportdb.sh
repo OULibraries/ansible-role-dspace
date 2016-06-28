@@ -1,5 +1,5 @@
 #!/bin/bash
-. /opt/oulib/etc/conf.sh
+. /opt/oulib/dspace/etc/conf.sh
 
 
 
